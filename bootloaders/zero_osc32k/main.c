@@ -41,8 +41,8 @@ static volatile bool main_b_cdc_enable = false;
  */
 static void check_start_application(void)
 {
-//  LED_init();
-//  LED_off();
+ LED_init();
+ //LED_off();
 
 #if (!defined DEBUG) || ((defined DEBUG) && (DEBUG == 0))
 uint32_t* pulSketch_Start_Address;
@@ -99,12 +99,14 @@ uint32_t* pulSketch_Start_Address;
     /* Wait 0.5sec to see if the user tap reset again.
      * The loop value is based on SAMD21 default 1MHz clock @ reset.
      */
+    LED_on();
     for (uint32_t i=0; i<125000; i++) /* 500ms */
       /* force compiler to not optimize this... */
       __asm__ __volatile__("");
 
     /* Timeout happened, continue boot... */
     BOOT_DOUBLE_TAP_DATA = 0;
+    //LED_off();
   }
 #endif
 
@@ -129,7 +131,7 @@ uint32_t* pulSketch_Start_Address;
 #endif
 */
 
-//  LED_on();
+  LED_on();
 
   /* Rebase the Stack Pointer */
   __set_MSP( (uint32_t)(__sketch_vectors_ptr) );
@@ -202,6 +204,7 @@ int main(void)
       while( 1 )
       {
         sam_ba_monitor_run();
+        //LED_pulse();
       }
     }
 #endif

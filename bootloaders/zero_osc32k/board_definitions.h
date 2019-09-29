@@ -26,7 +26,7 @@
  * BOOT_DOUBLE_TAP_ADDRESS must point to a free SRAM cell that must not
  * be touched from the loaded application.
  */
-#define BOOT_DOUBLE_TAP_ADDRESS           (0x20007FFCul)
+#define BOOT_DOUBLE_TAP_ADDRESS           (0x20001FFCul)
 #define BOOT_DOUBLE_TAP_DATA              (*((volatile uint32_t *) BOOT_DOUBLE_TAP_ADDRESS))
 
 /*
@@ -72,8 +72,8 @@
 /*
  * LEDs definitions
  */
-#define BOARD_LED_PORT                    (8 / 32)
-#define BOARD_LED_PIN                     (8) // PA07 is PORT A, pin 8
+#define BOARD_LED_PORT                    PORT_PA30 
+#define BOARD_LED_PIN                     PIN_PA30 // PA30 is PORT A, pin 
 
 // #define BOARD_LEDRX_PORT                  (1)
 // #define BOARD_LEDRX_PIN                   (3)

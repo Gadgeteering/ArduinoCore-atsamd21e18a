@@ -23,7 +23,7 @@
 #include <sam.h>
 #include "board_definitions.h"
 
-inline void LED_init(void) { PORT->Group[BOARD_LED_PORT].DIRSET.reg = (1<<BOARD_LED_PIN); }
+inline void LED_init(void) { PORT->Group[BOARD_LED_PORT].DIRSET.reg= (1<<BOARD_LED_PIN); }
 inline void LED_on(void) { PORT->Group[BOARD_LED_PORT].OUTSET.reg = (1<<BOARD_LED_PIN); }
 inline void LED_off(void) { PORT->Group[BOARD_LED_PORT].OUTCLR.reg = (1<<BOARD_LED_PIN); }
 inline void LED_toggle(void) { PORT->Group[BOARD_LED_PORT].OUTTGL.reg = (1<<BOARD_LED_PIN); }

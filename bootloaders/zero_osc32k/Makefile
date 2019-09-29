@@ -70,10 +70,8 @@ else
 CFLAGS+=-Os -DDEBUG=0
 endif
 
-# Arduino Zero (PID == 0x004D)
-CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x61 -DUSB_PID_LOW=0x24 -DUSB_VID_LOW=0xEB -DUSB_VID_HIGH=0x03
-# Genuino Zero (PID == 0x024D)
-# CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x02 -DUSB_PID_LOW=0x4D -DUSB_VID_LOW=0x41 -DUSB_VID_HIGH=0x23
+# Use Arduino Zero USB (PID == 0x004D)
+CFLAGS_EXTRA?=-D__SAMR21E16A__ -DUSB_PID_HIGH=0x61 -DUSB_PID_LOW=0x24 -DUSB_VID_LOW=0xEB -DUSB_VID_HIGH=0x03
 
 INCLUDES=-I"$(MODULE_PATH)/tools/CMSIS/4.5.0/CMSIS/Include/" -I"ATMEL/" -I"$(MODULE_PATH)/tools/CMSIS-Atmel/1.0.0/CMSIS/Device/ATMEL/" -I"ASF/"
 
@@ -119,7 +117,7 @@ all: print_info $(SOURCES) $(BIN) $(HEX) $(AS_BUILD)
 $(ELF): Makefile $(BUILD_PATH) $(OBJECTS)
 	@echo ----------------------------------------------------------
 	@echo Creating ELF binary
-	"$(CC)" -L. -L$(BUILD_PATH) $(LDFLAGS) -Os -Wl,--gc-sections -save-temps -Tbootloader_samd21x18.ld -Wl,-Map,"$(BUILD_PATH)/$(NAME).map" -o "$(BUILD_PATH)/$(ELF)" -Wl,--start-group $(OBJECTS) -lm -Wl,--end-group
+	"$(CC)" -L. -L$(BUILD_PATH) $(LDFLAGS) -Os -Wl,--gc-sections -save-temps -Tbootloader_samd21x16.ld -Wl,-Map,"$(BUILD_PATH)/$(NAME).map" -o "$(BUILD_PATH)/$(ELF)" -Wl,--start-group $(OBJECTS) -lm -Wl,--end-group
 	"$(NM)" "$(BUILD_PATH)/$(ELF)" >"$(BUILD_PATH)/$(NAME)_symbols.txt"
 	"$(SIZE)" --format=sysv -t -x $(BUILD_PATH)/$(ELF)
 
